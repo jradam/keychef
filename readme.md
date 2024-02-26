@@ -1,8 +1,13 @@
+<div align="center">
+
 ### KeyChef
 
-###### A tiny keyboard layer management tool
+###### a tiny keyboard layer management tool
 
 [![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=ffdd54)](https://www.python.org)
+
+</div>
+<br />
 
 ### Why do I exist?
 
@@ -10,8 +15,8 @@ If you do any programming, you might agree that brackets and symbols are used fr
 
 ### Usage
 
-Activate the new layer by holding `on_activate` (default `;`).
+Activate the new layer by holding the `activate_key` (default `;`).
 
-Your `on_activate` key will not be sent, so ensure you bind this to a new key on the new layer.
+Your `activate_key` key will not actually be sent, so ensure you bind this to a new key on the new layer.
 
-KeyChef can also send an on_activate key (default `F13`).
+KeyChef can also send a press `on_activate` (default `F13`).
