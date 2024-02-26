@@ -3,10 +3,12 @@ from winput import (
     VK_2, VK_4, VK_7, VK_A, VK_B, VK_BACK, VK_C, VK_DELETE, VK_DOWN, VK_E, VK_F, VK_F13, VK_G, VK_H, VK_I, VK_J, VK_K, VK_L, VK_LEFT, VK_M, VK_N, VK_OEM_1, VK_OEM_4, VK_OEM_6, VK_OEM_MINUS, VK_OEM_PLUS, VK_Q, VK_RETURN, VK_RIGHT, VK_S, VK_SHIFT, VK_UP, VK_X, VK_D, VK_9, VK_0, VK_LSHIFT, press_key, release_key, hook_keyboard, wait_messages, KeyboardEvent, WP_DONT_PASS_INPUT_ON, WM_KEYDOWN, WM_KEYUP, WP_UNHOOK, WP_STOP
 )
 
+# TODO: Finish extracting all bindings to user settings
 # TODO: Finish readme
-# TODO: Add full user configuration
 # TODO: Add a build process to .exe
 # TODO: Mouse movement
+# TODO: Binding Caps Lock
+# TODO: Add a gui?
 
 # USER SETTINGS HERE
 
