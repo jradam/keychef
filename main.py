@@ -63,7 +63,7 @@ def press(key, shift=False):
 def double(key1, key2):
     global last_key_time, last_key
     current_time = time.time()
-    if last_key == key1[0] and (current_time - last_key_time) < 0.2:
+    if last_key == key1[0] and (current_time - last_key_time) < 0.15:
         hit(VK_BACK)
         press(*key2)
     else:
