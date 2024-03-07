@@ -20,3 +20,7 @@ Activate the new layer by holding the `activate_key` (default `;`).
 Your `activate_key` key will not actually be sent, so ensure you bind this to a new key on the new layer.
 
 KeyChef can also send a press `on_activate` (default `F13`).
+
+### Notes
+
+Build Windows executable by running `pyinstaller --onefile .\keychef.pyw` in a windows environment.

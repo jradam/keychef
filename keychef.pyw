@@ -12,6 +12,7 @@ from winput import (
 # TODO: Binding Caps Lock
 # TODO: Add a gui?
 
+
 # USER SETTINGS HERE
 
 activate_key = VK_OEM_1
