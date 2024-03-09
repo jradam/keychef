@@ -15,6 +15,7 @@ def absolute_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
+# TODO: First iteration of settings - just show console window
 # TODO: Instead of `running`, `shifted`, etc, use a class to store state
 # TODO: Finish extracting all bindings to user settings
 # TODO: Finish readme
@@ -33,18 +34,22 @@ on_activate = VK_F13
 
 # TRAY ICON
 
-def stop_cooking():
-    global running
-    global icon
-    icon.stop()
-    running = False
+def on_clicked(icon, item):
+    if str(item) == "Settings":
+        global settings
+        # Open settings...
+    elif str(item) == "Exit":
+        global running
+        running = False
+        icon.stop()
 
 
 image = PIL.Image.open(absolute_path("icon.png"))
 running = True
 
 icon = pystray.Icon("Keychef", image, menu=pystray.Menu(
-    pystray.MenuItem("Exit", stop_cooking)
+    pystray.MenuItem("Settings", on_clicked),
+    pystray.MenuItem("Exit", on_clicked)
 ))
 
 
