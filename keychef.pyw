@@ -15,7 +15,7 @@ def absolute_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-# TODO: implement pystray
+# TODO: Instead of `running`, `shifted`, etc, use a class to store state
 # TODO: Finish extracting all bindings to user settings
 # TODO: Finish readme
 # TODO: Change caps lock to escape
