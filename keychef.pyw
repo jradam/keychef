@@ -1,7 +1,19 @@
 import time
+import pystray
+import PIL.Image
 from winput import (
-    VK_2, VK_4, VK_7, VK_A, VK_BACK, VK_C, VK_DELETE, VK_DOWN, VK_E, VK_F, VK_F13, VK_G, VK_H, VK_I, VK_J, VK_K, VK_L, VK_LEFT, VK_M, VK_N, VK_OEM_1, VK_OEM_4, VK_OEM_6, VK_OEM_MINUS, VK_OEM_PLUS, VK_Q, VK_RETURN, VK_RIGHT, VK_S, VK_SHIFT, VK_SPACE, VK_UP, VK_X, VK_D, VK_9, VK_0, VK_LSHIFT, press_key, release_key, hook_keyboard, wait_messages, KeyboardEvent, WP_DONT_PASS_INPUT_ON, WM_KEYDOWN, WM_KEYUP, WP_UNHOOK, WP_STOP
+    VK_2, VK_4, VK_7, VK_A, VK_BACK, VK_C, VK_DELETE, VK_DOWN, VK_E, VK_F, VK_F13, VK_G, VK_H, VK_I, VK_J, VK_K, VK_L, VK_LEFT, VK_M, VK_N, VK_OEM_1, VK_OEM_4, VK_OEM_6, VK_OEM_MINUS, VK_OEM_PLUS, VK_RETURN, VK_RIGHT, VK_S, VK_SHIFT, VK_SPACE, VK_UP, VK_X, VK_D, VK_9, VK_0, VK_LSHIFT, press_key, release_key, hook_keyboard, wait_messages, KeyboardEvent, WP_DONT_PASS_INPUT_ON, WM_KEYDOWN, WM_KEYUP, WP_UNHOOK, WP_STOP
 )
+import sys
+import os
+import threading
+
+
+def absolute_path(relative_path):
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(
+        os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
 
 # TODO: implement pystray
 # TODO: Finish extracting all bindings to user settings
@@ -15,12 +27,32 @@ from winput import (
 
 
 # USER SETTINGS HERE
-
 activate_key = VK_OEM_1
 on_activate = VK_F13
 
-# END USER SETTINGS
 
+# TRAY ICON
+
+def stop_cooking():
+    global running
+    global icon
+    icon.stop()
+    running = False
+
+
+image = PIL.Image.open(absolute_path("icon.png"))
+running = True
+
+icon = pystray.Icon("Keychef", image, menu=pystray.Menu(
+    pystray.MenuItem("Exit", stop_cooking)
+))
+
+
+# Start icon in separate thread
+threading.Thread(target=icon.run).start()
+
+
+# KEYCHEF
 cooking, shifted, sending_replacement = False, False, False
 last_key_time, last_key = 0, None
 
@@ -102,8 +134,6 @@ def handle_ingredients(event: KeyboardEvent):
         VK_C: lambda: send_replacement(),
     }
     if event.action == WM_KEYDOWN:
-        if event.vkCode == VK_Q:
-            return WP_UNHOOK | WP_STOP
         action = key_map.get(event.vkCode)
         if action:
             action()
@@ -111,6 +141,9 @@ def handle_ingredients(event: KeyboardEvent):
 
 
 def keyboard_callback(event: KeyboardEvent):
+    global running
+    if not running:
+        return WP_UNHOOK | WP_STOP
     if event.vkCode == VK_LSHIFT:
         return toggle_shifted(event)
     if event.vkCode == activate_key and not shifted and not sending_replacement:
