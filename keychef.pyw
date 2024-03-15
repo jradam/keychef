@@ -15,6 +15,7 @@ def absolute_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
+# TODO: Create requirements.txt file
 # TODO: First iteration of settings - just show console window
 # TODO: Instead of `running`, `shifted`, etc, use a class to store state
 # TODO: Finish extracting all bindings to user settings
