@@ -1,20 +1,12 @@
+from main.icon import running
+import main.settings as s
 import time
-import pystray
-import PIL.Image
 import winput as w
-import sys
-import os
-import threading
 
 
-def absolute_path(relative_path):
-    base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(base_path, relative_path)
-
-
+# TODO: Instead of `running`, `shifted`, etc, use a class to store state.
 # TODO: Create requirements.txt file
 # TODO: First iteration of settings - just show console window
-# TODO: Instead of `running`, `shifted`, etc, use a class to store state
 # TODO: Finish extracting all bindings to user settings
 # TODO: Finish readme
 # TODO: Change caps lock to escape
@@ -25,41 +17,6 @@ def absolute_path(relative_path):
 # TODO: Add a gui?
 
 
-# USER SETTINGS HERE
-activate_key = w.VK_OEM_1
-on_activate = w.VK_F13
-
-
-# TRAY ICON
-
-
-def on_clicked(icon, item):
-    if str(item) == "Settings":
-        global settings
-        # Open settings...
-    elif str(item) == "Exit":
-        global running
-        running = False
-        icon.stop()
-
-
-image = PIL.Image.open(absolute_path("icon.png"))
-running = True
-
-icon = pystray.Icon(
-    "Keychef",
-    image,
-    menu=pystray.Menu(
-        pystray.MenuItem("Settings", on_clicked), pystray.MenuItem("Exit", on_clicked)
-    ),
-)
-
-
-# Start icon in separate thread
-threading.Thread(target=icon.run).start()
-
-
-# KEYCHEF
 cooking, shifted, sending_replacement = False, False, False
 last_key_time, last_key = 0, None
 
@@ -68,10 +25,10 @@ def toggle_cooking(event: w.KeyboardEvent):
     global cooking
     if event.action == w.WM_KEYDOWN:
         cooking = True
-        w.press_key(on_activate)
+        w.press_key(s.on_activate)
     elif event.action == w.WM_KEYUP:
         cooking = False
-        w.release_key(on_activate)
+        w.release_key(s.on_activate)
     return w.WP_DONT_PASS_INPUT_ON
 
 
@@ -116,7 +73,7 @@ def double(key1, key2):
 def send_replacement():
     global sending_replacement
     sending_replacement = True
-    hit(activate_key)
+    hit(s.activate_key)
     sending_replacement = False
 
 
@@ -153,7 +110,7 @@ def keyboard_callback(event: w.KeyboardEvent):
         return w.WP_UNHOOK | w.WP_STOP
     if event.vkCode == w.VK_LSHIFT:
         return toggle_shifted(event)
-    if event.vkCode == activate_key and not shifted and not sending_replacement:
+    if event.vkCode == s.activate_key and not shifted and not sending_replacement:
         return toggle_cooking(event)
     elif cooking:
         return handle_ingredients(event)

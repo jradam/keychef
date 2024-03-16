@@ -23,4 +23,4 @@ KeyChef can also send a press `on_activate` (default `F13`).
 
 ### Notes
 
-Build Windows executable by running `pyinstaller --onedir --noconfirm --add-data "icon.png;." keychef.pyw` in a Windows environment.
+Build Windows executable by running `pyinstaller --onedir --noconfirm --add-data "main/icon.png;." keychef.pyw` in a Windows environment.
