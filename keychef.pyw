@@ -19,12 +19,11 @@ import PIL.Image
 from pystray import Icon, Menu, MenuItem
 
 
-# TODO: Create requirements.txt file
 # TODO: First iteration of settings - just show console window
-# TODO: Finish extracting all bindings to user settings
+# TODO: Add option to show or hide settings/console on startup
+# TODO: Extract all bindings to user settings, make it a json file
 # TODO: Finish readme
 # TODO: Mouse movement
-# TODO: Add a gui?
 
 
 class State:
