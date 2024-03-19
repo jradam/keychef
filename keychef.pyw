@@ -1,5 +1,17 @@
 from main.settings import activate_key, on_activate
 import time
+from winput import (
+    press_key,
+    release_key,
+    KeyboardEvent,
+    hook_keyboard,
+    wait_messages,
+    WM_KEYUP,
+    WM_KEYDOWN,
+    WP_DONT_PASS_INPUT_ON,
+    WP_STOP,
+    WP_UNHOOK,
+)
 import winput as w
 from main.helpers import absolute_path, hit, press
 import threading
@@ -11,11 +23,7 @@ from pystray import Icon, Menu, MenuItem
 # TODO: First iteration of settings - just show console window
 # TODO: Finish extracting all bindings to user settings
 # TODO: Finish readme
-# TODO: Change caps lock to escape
-# TODO: Add caps lock functionality to other key
 # TODO: Mouse movement
-# TODO: Add a build process to .exe
-# TODO: Binding Caps Lock
 # TODO: Add a gui?
 
 
@@ -30,20 +38,21 @@ class State:
 
     def exit(self):
         self.running = False
+        hit(w.VK_ESCAPE)  # Hit key to trigger callback, which then quits
 
-    def toggle_cooking(self, event: w.KeyboardEvent):
-        if event.action == w.WM_KEYDOWN:
+    def toggle_cooking(self, event: KeyboardEvent):
+        if event.action == WM_KEYDOWN:
             self.cooking = True
-            w.press_key(on_activate)
-        elif event.action == w.WM_KEYUP:
+            press_key(on_activate)
+        elif event.action == WM_KEYUP:
             self.cooking = False
-            w.release_key(on_activate)
-        return w.WP_DONT_PASS_INPUT_ON
+            release_key(on_activate)
+        return WP_DONT_PASS_INPUT_ON
 
-    def toggle_shifted(self, event: w.KeyboardEvent):
-        if event.action == w.WM_KEYDOWN:
+    def toggle_shifted(self, event: KeyboardEvent):
+        if event.action == WM_KEYDOWN:
             self.shifted = True
-        elif event.action == w.WM_KEYUP:
+        elif event.action == WM_KEYUP:
             self.shifted = False
 
     def double(self, key1, key2):
@@ -81,7 +90,7 @@ icon = Icon(
 threading.Thread(target=icon.run).start()
 
 
-def handle_ingredients(event: w.KeyboardEvent):
+def handle_ingredients(event: KeyboardEvent):
     key_map = {
         w.VK_F: lambda: state.double((w.VK_OEM_4, True), (w.VK_OEM_6, True)),
         w.VK_D: lambda: state.double((w.VK_9, True), (w.VK_0, True)),
@@ -98,18 +107,19 @@ def handle_ingredients(event: w.KeyboardEvent):
         w.VK_J: lambda: press(w.VK_DOWN),
         w.VK_K: lambda: press(w.VK_UP),
         w.VK_L: lambda: press(w.VK_RIGHT),
+        w.VK_CAPITAL: lambda: hit(w.VK_CAPITAL),
         w.VK_C: lambda: state.send_replacement(),
     }
-    if event.action == w.WM_KEYDOWN:
+    if event.action == WM_KEYDOWN:
         action = key_map.get(event.vkCode)
         if action:
             action()
-            return w.WP_DONT_PASS_INPUT_ON
+            return WP_DONT_PASS_INPUT_ON
 
 
-def keyboard_callback(event: w.KeyboardEvent):
+def callback(event: KeyboardEvent):
     if not state.running:
-        return w.WP_UNHOOK | w.WP_STOP
+        return WP_UNHOOK | WP_STOP
     if event.vkCode == w.VK_LSHIFT:
         return state.toggle_shifted(event)
     if (
@@ -118,9 +128,12 @@ def keyboard_callback(event: w.KeyboardEvent):
         and not state.sending_replacement
     ):
         return state.toggle_cooking(event)
-    elif state.cooking:
+    if state.cooking:
         return handle_ingredients(event)
+    elif event.vkCode == w.VK_CAPITAL:
+        hit(w.VK_ESCAPE)
+        return WP_DONT_PASS_INPUT_ON
 
 
-w.hook_keyboard(keyboard_callback)
-w.wait_messages()
+hook_keyboard(callback)
+wait_messages()
