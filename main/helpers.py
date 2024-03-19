@@ -1,4 +1,13 @@
-from winput import press_key, release_key, VK_SHIFT
+from winput import (
+    press_key,
+    release_key,
+    VK_SHIFT,
+    KeyboardEvent,
+    WM_KEYDOWN,
+    WM_KEYUP,
+    VK_ESCAPE,
+    WP_DONT_PASS_INPUT_ON,
+)
 import os
 import sys
 
@@ -25,3 +34,13 @@ def press(key, shift=False):
         shift_hit(key)
     else:
         hit(key)
+
+
+def remap(event: KeyboardEvent, from_key, to_key) -> bool:
+    if event.vkCode == from_key:
+        if event.action == WM_KEYDOWN:
+            press_key(to_key)
+        elif event.action == WM_KEYUP:
+            release_key(to_key)
+        return True
+    return False
