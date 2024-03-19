@@ -5,6 +5,7 @@
 ###### a tiny keyboard layer management tool
 
 [![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=ffdd54)](https://www.python.org)
+[![Windows](https://shields.io/badge/Windows--9cf?logo=Windows&style=social)](https://www.microsoft.com/software-download/windows11)
 
 </div>
 <br />
