@@ -13,7 +13,7 @@ from winput import (
     WP_UNHOOK,
 )
 import winput as w
-from main.helpers import absolute_path, hit, press
+from main.helpers import absolute_path, hit, press, remap
 import threading
 import PIL.Image
 from pystray import Icon, Menu, MenuItem
@@ -119,6 +119,9 @@ def handle_ingredients(event: KeyboardEvent):
 def callback(event: KeyboardEvent):
     if not state.running:
         return WP_UNHOOK | WP_STOP
+    if state.cooking and event.vkCode == w.VK_Q:
+        icon.stop()
+        state.exit()
     if event.vkCode == w.VK_LSHIFT:
         return state.toggle_shifted(event)
     if (
@@ -129,8 +132,7 @@ def callback(event: KeyboardEvent):
         return state.toggle_cooking(event)
     if state.cooking:
         return handle_ingredients(event)
-    elif event.vkCode == w.VK_CAPITAL:
-        hit(w.VK_ESCAPE)
+    if remap(event, w.VK_CAPITAL, w.VK_ESCAPE):
         return WP_DONT_PASS_INPUT_ON
 
 
