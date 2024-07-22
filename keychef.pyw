@@ -19,6 +19,7 @@ import PIL.Image
 from pystray import Icon, Menu, MenuItem
 
 
+# TODO: Fix windows "Are you sure you want to run this?" warning
 # TODO: First iteration of settings - just show console window
 # TODO: Add option to show or hide settings/console on startup
 # TODO: Extract all bindings to user settings, make it a json file
