@@ -89,19 +89,25 @@ def handle_ingredients(event: w.KeyboardEvent) -> int | None:
 def callback(event: w.KeyboardEvent) -> int | None:
     if not state.running:
         return WP_UNHOOK | WP_STOP
+
     if state.cooking and event.vkCode == w.VK_Q:
         icon.stop()
         state.exit()
+        return
+
     if event.vkCode == w.VK_LSHIFT:
         return state.toggle_shifted(event)
+
     if (
         event.vkCode == activate_key
         and not state.shifted
         and not state.sending_replacement
     ):
         return state.toggle_cooking(event)
+
     if state.cooking:
         return handle_ingredients(event)
+
     if remap(event, w.VK_CAPITAL, w.VK_ESCAPE):
         return WP_DONT_PASS_INPUT_ON
 
