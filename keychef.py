@@ -32,6 +32,7 @@ class State:
         self.running: bool = True
         self.cooking: bool = False
         self.shifted: bool = False
+        self.sending_replacement: bool = False
         self.last_key_time: float = 0
         self.last_key: int | None = None
 
@@ -53,6 +54,12 @@ class State:
             self.shifted = True
         elif event.action == WM_KEYUP:
             self.shifted = False
+
+    def send_replacement(self):
+        self.sending_replacement = True
+        hit(activate_key)
+        self.sending_replacement = False
+        return WP_DONT_PASS_INPUT_ON
 
 
 state = State()
@@ -80,16 +87,18 @@ def callback(event: w.KeyboardEvent) -> int | None:
     if event.vkCode == w.VK_LSHIFT:
         return state.toggle_shifted(event)
 
-    if state.cooking:
-        if event.action == WM_KEYDOWN:
-            if event.vkCode == get_keycode(replace_key):
-                hit(activate_key)
-                return WP_DONT_PASS_INPUT_ON
-            else:
-                return handle_ingredients(event, layer_binds)
-
-    if event.vkCode == activate_key and not state.shifted:
+    if (
+        event.vkCode == activate_key
+        and not state.shifted
+        and not state.sending_replacement
+    ):
         return state.toggle_cooking(event)
+
+    if state.cooking:
+        if event.action == WM_KEYDOWN and event.vkCode == get_keycode(replace_key):
+            return state.send_replacement()
+        else:
+            return handle_ingredients(event, layer_binds)
 
     return handle_ingredients(event, permanent_binds)
 
