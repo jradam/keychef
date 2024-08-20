@@ -16,7 +16,7 @@ If you do any programming, you might agree that brackets and symbols are used fr
 
 ### Usage
 
-Edit `settings.py` to configure KeyChef to your liking.
+Edit `settings.py` to configure KeyChef to your liking. Any keys you want to bind (or send) will need to be added to `dictionary.py`.
 
 Activate the new layer by holding `activate_key` (default `;`).
 
