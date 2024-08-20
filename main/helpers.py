@@ -6,12 +6,18 @@ from winput import (
 )
 import os
 import sys
+from main.types import KeyCode
+from main.dictionary import keys
 
 
 # Required for pyinstaller to find files
 def absolute_path(relative_path) -> str:
     base_path = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
+
+
+def get_keycode(name: str) -> KeyCode:
+    return keys[name][0]
 
 
 def hit(key) -> None:
@@ -30,13 +36,3 @@ def press(key, shift=False) -> None:
         shift_hit(key)
     else:
         hit(key)
-
-
-def remap(event: w.KeyboardEvent, from_key, to_key) -> bool:
-    if event.vkCode == from_key:
-        if event.action == WM_KEYDOWN:
-            w.press_key(to_key)
-        elif event.action == WM_KEYUP:
-            w.release_key(to_key)
-        return True
-    return False
