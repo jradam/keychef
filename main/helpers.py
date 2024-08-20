@@ -1,9 +1,4 @@
 import winput as w
-from winput import (
-    VK_SHIFT,
-    WM_KEYDOWN,
-    WM_KEYUP,
-)
 import os
 import sys
 from main.types import KeyCode
@@ -16,6 +11,7 @@ def absolute_path(relative_path) -> str:
     return os.path.join(base_path, relative_path)
 
 
+# Get the KeyCode from a Dictionary Key tuple
 def get_keycode(name: str) -> KeyCode:
     return keys[name][0]
 
@@ -23,16 +19,3 @@ def get_keycode(name: str) -> KeyCode:
 def hit(key) -> None:
     w.press_key(key)
     w.release_key(key)
-
-
-def shift_hit(key) -> None:
-    w.press_key(VK_SHIFT)
-    hit(key)
-    w.release_key(VK_SHIFT)
-
-
-def press(key, shift=False) -> None:
-    if shift == True:
-        shift_hit(key)
-    else:
-        hit(key)

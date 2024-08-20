@@ -1,16 +1,15 @@
-from main.helpers import get_keycode
-
 # User settings
-activate_key = get_keycode("semicolon")
-on_activate = get_keycode("F13")
+activate_key = "semicolon"
+on_activate = "F13"
 replace_key = "c"
+exit_key = "q"
 
 # Binds that are always active
 permanent_binds = [
     {"key": "capslock", "output": "escape"},
 ]
 
-# Binds for when the keychef layer is active
+# Binds for when the KeyChef layer is active
 layer_binds = [
     {"key": "m", "output": "dollar"},
     {"key": "f", "output": "brace_open"},

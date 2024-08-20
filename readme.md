@@ -16,9 +16,11 @@ If you do any programming, you might agree that brackets and symbols are used fr
 
 ### Usage
 
-Activate the new layer by holding the `activate_key` (default `;`).
+Edit `settings.py` to configure KeyChef to your liking.
 
-Your `activate_key` key will not actually be sent, so ensure you bind this to a new key on the new layer.
+Activate the new layer by holding `activate_key` (default `;`).
+
+Your `activate_key` key will not actually be sent, so ensure you bind this to a new key on the new layer with `replace_key`.
 
 KeyChef can also send a press `on_activate` (default `F13`).
 

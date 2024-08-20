@@ -16,6 +16,7 @@ keys: Dictionary = {
     "l": (w.VK_L, False),
     "m": (w.VK_M, False),
     "n": (w.VK_N, False),
+    "q": (w.VK_Q, False),
     "s": (w.VK_S, False),
     "u": (w.VK_U, False),
     "x": (w.VK_X, False),
