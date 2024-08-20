@@ -1,0 +1,50 @@
+from main.types import Dictionary
+import winput as w
+
+keys: Dictionary = {
+    # Letters
+    "a": (w.VK_A, False),
+    "c": (w.VK_C, False),
+    "d": (w.VK_D, False),
+    "e": (w.VK_E, False),
+    "f": (w.VK_F, False),
+    "g": (w.VK_G, False),
+    "h": (w.VK_H, False),
+    "i": (w.VK_I, False),
+    "j": (w.VK_J, False),
+    "k": (w.VK_K, False),
+    "l": (w.VK_L, False),
+    "m": (w.VK_M, False),
+    "n": (w.VK_N, False),
+    "s": (w.VK_S, False),
+    "u": (w.VK_U, False),
+    "x": (w.VK_X, False),
+    # Brackets
+    "brace_close": (w.VK_OEM_6, True),
+    "brace_open": (w.VK_OEM_4, True),
+    "bracket_close": (w.VK_OEM_6, False),
+    "bracket_open": (w.VK_OEM_4, False),
+    "parenthesis_open": (w.VK_9, True),
+    "parenthesis_close": (w.VK_0, True),
+    # Symbols
+    "ampersand": (w.VK_7, True),
+    "dollar": (w.VK_4, True),
+    "minus": (w.VK_OEM_MINUS, False),
+    "plus": (w.VK_OEM_PLUS, False),
+    "quote_double": (w.VK_2, True),
+    "quote_single": (w.VK_7, False),
+    "semicolon": (w.VK_OEM_1, False),
+    "space": (w.VK_SPACE, False),
+    "underscore": (w.VK_OEM_MINUS, True),
+    # Actions
+    "F13": (w.VK_F13, False),
+    "backspace": (w.VK_BACK, False),
+    "capslock": (w.VK_CAPITAL, False),
+    "delete": (w.VK_DELETE, False),
+    "down": (w.VK_DOWN, False),
+    "escape": (w.VK_ESCAPE, False),
+    "left": (w.VK_LEFT, False),
+    "return": (w.VK_RETURN, False),
+    "right": (w.VK_RIGHT, False),
+    "up": (w.VK_UP, False),
+}
