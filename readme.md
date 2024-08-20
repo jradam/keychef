@@ -26,4 +26,6 @@ KeyChef can also send a press `on_activate` (default `F13`).
 
 To get started with this project, install the required dependencies with `pip install -r requirements.txt`
 
-You can build the Windows executable by running `pyinstaller --onedir --noconfirm --add-data "main/icon.png;." keychef.pyw` in a Windows environment.
+To run the app, just run `keychef.pyw`.
+
+You can build a Windows executable by running `pyinstaller --onedir --noconfirm --add-data "main/icon.png;." keychef.pyw` in a Windows environment.
