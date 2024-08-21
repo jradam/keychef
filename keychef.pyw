@@ -20,6 +20,7 @@ from main.helpers import hit, get_keycode
 from main.icon import setup_icon
 import threading
 
+# TODO: Finish adding types everywhere
 # TODO: Mouse movement
 # TODO: Make settings a json file
 # TODO: Dictionary currently for UK layout. Can detect layout?
