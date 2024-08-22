@@ -1,4 +1,4 @@
-from main.types import Dictionary
+from .keychef_types import Dictionary
 import winput as w
 
 keys: Dictionary = {

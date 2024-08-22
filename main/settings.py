@@ -1,3 +1,5 @@
+from .keychef_types import BindList
+
 # User settings
 activate_key = "semicolon"
 on_activate = "F13"
@@ -5,12 +7,12 @@ replace_key = "c"
 exit_key = "q"
 
 # Binds that are always active
-permanent_binds = [
+permanent_binds: BindList = [
     {"key": "capslock", "output": "escape"},
 ]
 
 # Binds for when the KeyChef layer is active
-layer_binds = [
+layer_binds: BindList = [
     {"key": "i", "output": "minus"},
     {"key": "a", "output": "ampersand"},
     {"key": "d", "output": "parenthesis_close"},
