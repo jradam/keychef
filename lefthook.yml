@@ -1,0 +1,5 @@
+pre-commit:
+  parallel: true
+  commands:
+    mypy:
+      run: mypy .
