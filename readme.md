@@ -30,4 +30,6 @@ To get started with this project, install the required dependencies with `pip in
 
 To run the app, just run `keychef.pyw`.
 
+To check types, run `mypy .`
+
 You can build a Windows executable by running `pyinstaller --onedir --noconfirm --add-data "main/icon.png;." keychef.pyw` in a Windows environment.
