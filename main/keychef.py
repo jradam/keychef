@@ -49,7 +49,7 @@ def main() -> None:
                 return block
         return None
 
-    def callback(event: w.KeyboardEvent) -> int | None:
+    def callback(event: w.KeyboardEvent):
         if not state.running:
             return unhook | stop
 
