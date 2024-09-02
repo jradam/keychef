@@ -27,17 +27,20 @@ layer_binds: BindList = [
     {"key": "l", "output": "right"},
     {"key": "m", "output": "dollar"},
     {"key": "n", "output": "return"},
-    {"key": "o", "output": ""},
-    {"key": "p", "output": ""},
+    # {"key": "o", "output": ""},
+    # {"key": "p", "output": ""},
     # {"key": "q", "output": ""}, # In use above
-    {"key": "r", "output": ""},
+    # {"key": "r", "output": ""},
     {"key": "s", "output": "parenthesis_open"},
-    {"key": "t", "output": ""},
+    # {"key": "t", "output": ""},
     {"key": "u", "output": "underscore"},
     {"key": "v", "output": "bracket_open"},
-    {"key": "w", "output": "capslock"},
+    # {"key": "w", "output": ""},
     {"key": "x", "output": "delete"},
-    {"key": "y", "output": ""},
-    {"key": "z", "output": ""},
-    {"key": "space", "output": ""},
+    {"key": "y", "output": "capslock"},
+    # {"key": "z", "output": ""},
+    # {"key": "space", "output": ""},
+    # FIXME: need blank here to stop 'caps' being sent in layer mode, should instead just send 'escape' as per permanent_binds. So need to prioritise permanent_binds somehow.
+    # FIXME: this also stops 'caps' being sent at all (so 'y' above not working) since 'y' sends 'caps' which sends blank
+    {"key": "capslock", "output": ""},
 ]
